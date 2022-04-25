@@ -1,0 +1,28 @@
+<annotation>
+    <folder>{{ folder if folder is not none else "" }}</folder>
+    <filename>{{ filename if filename is not none else "" }}</filename>
+    <path>{{ path if path is not none else "" }}</path>
+    <source>
+        <database>{{ database if database is not none else "" }}</database>
+    </source>
+    <size>
+        <width>{{ width }}</width>
+        <height>{{ height }}</height>
+        <depth>{{ depth }}</depth>
+    </size>
+    <segmented>{{ segmented if segmented is not none else "" }}</segmented>
+{% for object in objects %}
+    <object>
+        <name>{{ object.name }}</name>
+    {% for name, value in object.attributes.items() %}
+        <{{ name }}>{{ value if value is not none else "" }}</{{ name }}>
+    {% endfor %}
+        <bndbox>
+            <xmin>{{ object.bndbox.xmin }}</xmin>
+            <ymin>{{ object.bndbox.ymin }}</ymin>
+            <xmax>{{ object.bndbox.xmax }}</xmax>
+            <ymax>{{ object.bndbox.ymax }}</ymax>
+        </bndbox>
+    </object>
+{% endfor %}
+</annotation>
